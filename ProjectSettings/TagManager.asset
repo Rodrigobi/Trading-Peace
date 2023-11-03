@@ -9,6 +9,7 @@ TagManager:
   - Slots
   - MainInventory
   - Slot
+  - Tormenta
   layers:
   - Default
   - TransparentFX
