@@ -113,4 +113,21 @@ public class BarcoController : MonoBehaviour
             velocidad = velocidadBase; // Restaura la velocidad normal
         }
     }
+
+    public void ReducirAgua(float cantidad)
+{
+    aguaActual -= cantidad;
+
+    // Asegúrate de que el agua no caiga por debajo de 0
+    if (aguaActual < 0)
+    {
+        aguaActual = 0;
+    }
+
+    // Actualiza la UI si es necesario
+    if (barraAguaUI != null && barraAguaUI.sliderAgua != null)
+    {
+        barraAguaUI.sliderAgua.value = aguaActual;
+    }
+}
 }
