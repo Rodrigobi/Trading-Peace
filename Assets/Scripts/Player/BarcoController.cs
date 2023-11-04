@@ -8,6 +8,7 @@ public class BarcoController : MonoBehaviour
     public float aguaMaxima = 100f; // Agrega un valor máximo para el agua
     private float aguaActual;
     private bool estaEnTormenta = false;
+    private Animator animator; // Variable para el componente Animator
     
     public BarraAguaUI barraAguaUI;
     private Rigidbody2D rb;
@@ -15,6 +16,7 @@ public class BarcoController : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>(); // Obtenemos la referencia al componente Animator
         velocidadBase = velocidad;
         aguaActual = aguaMaxima; // Inicializa el agua actual al máximo
     }
@@ -54,14 +56,17 @@ public class BarcoController : MonoBehaviour
         {
             rb.velocity = movimiento * velocidad;
 
+            // Establecer el parámetro isMoving en el Animator
+            animator.SetBool("isMoving", movimiento.magnitude > 0);
+
             // Flip the sprite by checking the direction of the X input
             if (inputX > 0)
             {
-                transform.localScale = new Vector3(1, 1, 1); // No flip, original orientation
+                transform.localScale = new Vector3(0.5f, 0.5f, 0.5f); // No flip, original orientation
             }
             else if (inputX < 0)
             {
-                transform.localScale = new Vector3(-1, 1, 1); // Flip on X axis
+                transform.localScale = new Vector3(-0.5f, 0.5f, 0.5f); // Flip on X axis
             }
         }
         else
